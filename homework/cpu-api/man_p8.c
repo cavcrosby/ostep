@@ -6,7 +6,7 @@
 #include <assert.h>
 #include <sys/wait.h>
 
-// This example comes from the man pages of pipe
+// This example comes from the man pages of 'pipe'
 // see 'EXAMPLE' section
 
 int main(int argc, char *argv[])
