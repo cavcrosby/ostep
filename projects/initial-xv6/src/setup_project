@@ -16,10 +16,7 @@ cd "$XV6_DIRECTORY_NAME" || exit 1
 # sloppy, may replace later (see SC2207 for shellcheck's opinion!)
 # shellcheck disable=SC2207
 SRC_FILES=($(ls --almost-all))
-for fil in "${SRC_FILES[@]}"; do mv --no-clobber "$fil" "../"; done
-if [ $? ]; then
-    exit 1
-fi
+for fil in "${SRC_FILES[@]}"; do mv --no-clobber "$fil" "../"; done || exit 1;
 cd .. || exit 1
 
 # some resources needed can be checked from path sets in some env vars
@@ -27,10 +24,11 @@ cd .. || exit 1
 source build
 
 # making sure the cross compiler and assembler parent directories exist
-# as build.sh only attaches the respective bin directory paths to PATH
+# as build only attaches the respective bin directory paths to PATH
 if ! [ -d "$(dirname GCC_BIN_PATH)" ] || ! [ -d "$(dirname AS_BIN_PATH)" ]; then
     echo "${PROGRAM_NAME}: download the i386 gcc/binutils packages and attach their bin locations to/from the build.sh"
     exit 1
 fi
 
+make mkfs
 build
