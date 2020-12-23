@@ -1,0 +1,27 @@
+#!/bin/bash
+# This should be ran in the same directory the script is located at!
+# Also assumes qemu and git are installed. Should be noted for Ubuntu QEMU package
+# that 'qemu' is a dummy package, various architectures are supported through the package
+# 'qemu-system'.
+
+XV6_DIRECTORY_NAME="xv6-public"
+PROGRAM_NAME="setup_project"
+
+# clone xv6 public repo
+git clone git@github.com:mit-pdos/xv6-public.git "$XV6_DIRECTORY_NAME"
+
+# move contents to ../src directory, 
+mv --no-clobber "${XV6_DIRECTORY_NAME}/*" "$PWD"
+
+# some resources needed can be checked from path sets in some env vars
+# shellcheck disable=SC1091
+source build.sh
+
+# making sure the cross compiler and assembler parent directories exist
+# as build.sh only attaches the respective bin directory paths to PATH
+if ! [ -d "$(dirname GCC_BIN_PATH)" ] || ! [ -d "$(dirname AS_BIN_PATH)" ]; then
+    echo "${PROGRAM_NAME}: download the i386 gcc/binutils packages and attach their bin locations to/from the build.sh"
+    exit 1
+fi
+
+./build.sh
