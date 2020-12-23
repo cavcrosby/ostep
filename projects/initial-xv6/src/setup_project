@@ -15,7 +15,7 @@ mv --no-clobber "${XV6_DIRECTORY_NAME}/*" "$PWD"
 
 # some resources needed can be checked from path sets in some env vars
 # shellcheck disable=SC1091
-source build.sh
+source build
 
 # making sure the cross compiler and assembler parent directories exist
 # as build.sh only attaches the respective bin directory paths to PATH
