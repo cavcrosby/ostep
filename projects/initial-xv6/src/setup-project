@@ -16,7 +16,7 @@ cd "$XV6_DIRECTORY_NAME" || exit 1
 # sloppy, may replace later (see SC2207 for shellcheck's opinion!)
 # shellcheck disable=SC2207
 SRC_FILES=($(ls --almost-all))
-for fil in "${SRC_FILES[@]}"; do mv --no-clobber "$fil" "../"; done || exit 1;
+for fil in "${SRC_FILES[@]}"; do if [ "$fil" != ".git" ]; then mv --no-clobber "$fil" "../"; fi; done || exit 1;
 cd .. || exit 1
 rm -rf "$XV6_DIRECTORY_NAME"
 
