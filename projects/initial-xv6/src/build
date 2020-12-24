@@ -3,6 +3,8 @@
 # modify the env vars below to change where the bins are 
 # for the i386 toolchain
 
+# Usage: source build; build
+
 I386_GCC_BIN_PATH="$HOME/resources/i386-elf-gcc/bin/"
 I386_AS_BIN_PATH="$HOME/resources/i386-elf-binutils/bin/"
 I386_AS_ABSOLUTE_PATH="$HOME/resources/i386-elf-binutils/bin/i386-elf-as"
