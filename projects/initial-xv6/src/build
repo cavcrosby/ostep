@@ -13,7 +13,7 @@ TEMP_DIR_NAME="temp"
 build () {
     mkdir "$TEMP_DIR_NAME"
     ! cd "$TEMP_DIR_NAME" && rmdir "$TEMP_DIR_NAME" && exit 1
-    cp "$AS_ABSOLUTE_PATH" "$PWD"
+    cp "$I386_AS_ABSOLUTE_PATH" "$PWD"
     ln -sf "./$(basename "$I386_AS_ABSOLUTE_PATH")" "as"
     cd ..
     export PATH="${I386_GCC_BIN_PATH}:${PATH}"
