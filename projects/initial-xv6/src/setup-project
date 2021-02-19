@@ -1,18 +1,29 @@
 #!/bin/bash
-# This should be ran in the same directory the script is located at!
+#
+# This script is used to setup the initial-xv6 project for ostep.
+# NOTE: This should be ran in the same directory the script is located at!
 
-XV6_DIRECTORY_NAME="xv6-public"
-PROGRAM_NAME="setup_project"
+XV6_URL="https://github.com/mit-pdos/xv6-public"
+XV6_DIRECTORY_NAME="$(basename "$XV6_URL")"
+PROGRAM_NAME="$(basename "$0")"
+
+if [ -d "$XV6_DIRECTORY_NAME" ]; then
+    rm --recursive --force "$XV6_DIRECTORY_NAME"
+fi
 
 # clone xv6 public repo
-git clone https://github.com/mit-pdos/xv6-public "$XV6_DIRECTORY_NAME"
+git clone "$XV6_URL" "$XV6_DIRECTORY_NAME"
 
 # move contents to ../src directory, 
 cd "$XV6_DIRECTORY_NAME" || exit 1
 
-# sloppy, may replace later (see SC2207 for shellcheck's opinion!)
-# shellcheck disable=SC2207
-SRC_FILES=($(ls --almost-all))
-for fil in "${SRC_FILES[@]}"; do if [ "$fil" != ".git" ]; then mv --no-clobber "$fil" "../"; fi; done || exit 1;
+for f in ./*; do
+    # removing the $PWD notation './' from the file name
+    f="${f:2:${#f}}"
+    if [ "$f" != ".git" ] && [ "$f" != "$XV6_DIRECTORY_NAME" ]; then 
+        mv --no-clobber "$f" "../"; 
+    fi; 
+done || exit 1;
+
 cd .. || exit 1
-rm -rf "$XV6_DIRECTORY_NAME"
+rm --recursive --force "$XV6_DIRECTORY_NAME"
