@@ -10,6 +10,7 @@ This is my attempt to self-pace through the book 'Operating Systems: Three Easy 
 * Homework (GitHub): https://github.com/remzi-arpacidusseau/ostep-homework
 * Projects (GitHub): https://github.com/remzi-arpacidusseau/ostep-projects
 * Book Code (GitHub): https://github.com/remzi-arpacidusseau/ostep-code
+* xv6 Resource Page: https://pdos.csail.mit.edu/6.828/2017/xv6.html
 
 ## License
 
